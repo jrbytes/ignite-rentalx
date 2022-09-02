@@ -1,7 +1,15 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
+import {
+  Column,
+  Entity,
+  PrimaryColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm'
 import { v4 as uuid } from 'uuid'
 
-@Entity('categories')
+import { EntityNames } from '../../../database/migrations/entityNames'
+
+@Entity(EntityNames.CATEGORIES)
 class Category {
   @PrimaryColumn()
   id?: string
@@ -15,7 +23,7 @@ class Category {
   @CreateDateColumn({ type: 'timestamp with time zone' })
   created_at: Date
 
-  @CreateDateColumn({ type: 'timestamp with time zone' })
+  @UpdateDateColumn({ type: 'timestamp with time zone' })
   updated_at: Date
 
   constructor() {
