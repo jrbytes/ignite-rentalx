@@ -1,6 +1,6 @@
 import { DataSource } from 'typeorm'
 
-import { Category } from '../modules/cars/model/Category'
+import { Category } from '../modules/cars/entities/Category'
 import { CreateCategories1662090870937 } from './migrations/1662090870937-CreateCategories'
 
 const dataSource = new DataSource({

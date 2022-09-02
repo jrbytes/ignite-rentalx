@@ -4,7 +4,6 @@ services:
   database_rentx:
     image: postgres
     container_name: database_rentx
-    restart: always
     ports:
       - 5432:5432
     environment:
