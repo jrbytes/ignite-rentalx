@@ -58,7 +58,7 @@
     ],
     "import/no-extraneous-dependencies": [
       "error",
-      { "devDependencies": ["**/*.spec.ts"] }
+      { "devDependencies": ["**/*.spec.ts", "jest.config.ts"] }
     ],
     "prettier/prettier": "error",
     "@typescript-eslint/explicit-module-boundary-types": ["error"]
