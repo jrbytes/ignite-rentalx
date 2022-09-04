@@ -1,16 +1,16 @@
 import {
   Column,
-  CreateDateColumn,
   Entity,
   PrimaryColumn,
+  CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm'
 import { v4 as uuid } from 'uuid'
 
-import { EntityNames } from '../../../database/migrations/entityNames'
+import { EntityNames } from '@shared/infra/typeorm/migrations/entityNames'
 
-@Entity(EntityNames.SPECIFICATIONS)
-class Specification {
+@Entity(EntityNames.CATEGORIES)
+class Category {
   @PrimaryColumn()
   id?: string
 
@@ -33,4 +33,4 @@ class Specification {
   }
 }
 
-export { Specification }
+export { Category }

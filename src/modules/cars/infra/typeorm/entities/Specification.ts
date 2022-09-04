@@ -7,30 +7,18 @@ import {
 } from 'typeorm'
 import { v4 as uuid } from 'uuid'
 
-import { EntityNames } from '../../../database/migrations/entityNames'
+import { EntityNames } from '@shared/infra/typeorm/migrations/entityNames'
 
-@Entity(EntityNames.USERS)
-class User {
+@Entity(EntityNames.SPECIFICATIONS)
+class Specification {
   @PrimaryColumn()
-  id: string
+  id?: string
 
   @Column()
   name: string
 
   @Column()
-  password: string
-
-  @Column()
-  email: string
-
-  @Column()
-  driver_license: string
-
-  @Column()
-  isAdmin: boolean
-
-  @Column()
-  avatar: string
+  description: string
 
   @CreateDateColumn({ type: 'timestamp with time zone' })
   created_at: Date
@@ -45,4 +33,4 @@ class User {
   }
 }
 
-export { User }
+export { Specification }

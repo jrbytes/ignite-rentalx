@@ -1,24 +1,36 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   PrimaryColumn,
-  CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm'
 import { v4 as uuid } from 'uuid'
 
-import { EntityNames } from '../../../database/migrations/entityNames'
+import { EntityNames } from '@shared/infra/typeorm/migrations/entityNames'
 
-@Entity(EntityNames.CATEGORIES)
-class Category {
+@Entity(EntityNames.USERS)
+class User {
   @PrimaryColumn()
-  id?: string
+  id: string
 
   @Column()
   name: string
 
   @Column()
-  description: string
+  password: string
+
+  @Column()
+  email: string
+
+  @Column()
+  driver_license: string
+
+  @Column()
+  isAdmin: boolean
+
+  @Column()
+  avatar: string
 
   @CreateDateColumn({ type: 'timestamp with time zone' })
   created_at: Date
@@ -33,4 +45,4 @@ class Category {
   }
 }
 
-export { Category }
+export { User }
