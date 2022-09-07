@@ -6,7 +6,7 @@ import dataSource from '@shared/infra/typeorm/data-source'
 
 import { Car } from '../entities/Car'
 
-export class CarsRepositoy implements ICarsRepository {
+export class CarsRepository implements ICarsRepository {
   private repository: Repository<Car>
 
   constructor() {
