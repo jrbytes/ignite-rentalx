@@ -6,12 +6,15 @@ import {
   UpdateDateColumn,
   ManyToOne,
   JoinColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm'
 import { v4 as uuid } from 'uuid'
 
 import { EntityNames } from '@shared/infra/typeorm/migrations/entityNames'
 
 import { Category } from './Category'
+import { Specification } from './Specification'
 
 @Entity(EntityNames.CARS)
 class Car {
@@ -45,6 +48,14 @@ class Car {
   @ManyToOne(() => Category)
   @JoinColumn({ name: 'category_id' })
   category: Category
+
+  @ManyToMany(() => Specification)
+  @JoinTable({
+    name: EntityNames.SPECIFICATIONS_CARS,
+    joinColumns: [{ name: 'car_id' }],
+    inverseJoinColumns: [{ name: 'specification_id' }],
+  })
+  specifications: Specification[]
 
   @CreateDateColumn({ type: 'timestamp with time zone' })
   created_at: Date
