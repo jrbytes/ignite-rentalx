@@ -5,4 +5,5 @@ export enum EntityNames {
   CARS = 'cars',
   SPECIFICATIONS_CARS = 'specifications_cars',
   CAR_IMAGES = 'car_images',
+  RENTALS = 'rentals',
 }
