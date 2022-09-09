@@ -20,10 +20,10 @@ export class Rental {
   @Column('uuid')
   user_id: string
 
-  @Column('timestamp with time zone')
+  @Column({ type: 'timestamp with time zone' })
   start_date: Date
 
-  @Column('timestamp with time zone')
+  @Column({ type: 'timestamp with time zone' })
   end_date: Date
 
   @Column()
@@ -32,10 +32,10 @@ export class Rental {
   @Column()
   total: number
 
-  @CreateDateColumn('timestamp with time zone')
+  @CreateDateColumn({ type: 'timestamp with time zone' })
   created_at: Date
 
-  @UpdateDateColumn('timestamp with time zone')
+  @UpdateDateColumn({ type: 'timestamp with time zone' })
   updated_at: Date
 
   constructor() {
