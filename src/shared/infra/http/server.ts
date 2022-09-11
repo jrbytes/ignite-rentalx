@@ -1,4 +1,8 @@
+import { createConnection } from '@shared/infra/typeorm/data-source'
+
 import { app } from './app'
+
+createConnection()
 
 const port = 3333
 

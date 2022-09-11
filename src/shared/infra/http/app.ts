@@ -1,16 +1,14 @@
 import express, { Request, Response, NextFunction } from 'express'
 import 'express-async-errors'
+import 'reflect-metadata'
 import swaggerUi from 'swagger-ui-express'
 
 import { AppError } from '@shared/errors/AppError'
-import { createConnection } from '@shared/infra/typeorm/data-source'
 
 import '@shared/container'
 
 import swaggerFile from '../../../swagger.json'
 import { router } from './routes'
-
-createConnection('database_rentx')
 
 const app = express()
 
