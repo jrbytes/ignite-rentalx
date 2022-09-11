@@ -31,11 +31,11 @@ describe('create category', () => {
       description: 'Category description test',
     })
 
-    expect(async () => {
-      await createCategory.execute({
+    await expect(
+      createCategory.execute({
         name: 'Category test',
         description: 'Category description test',
       })
-    }).rejects.toBeInstanceOf(AppError)
+    ).rejects.toBeInstanceOf(AppError)
   })
 })

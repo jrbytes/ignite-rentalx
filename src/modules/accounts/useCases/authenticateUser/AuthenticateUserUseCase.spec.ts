@@ -36,12 +36,12 @@ describe('Authenticate User', () => {
   })
 
   it('should not be able to authenticate an nonexistent user', async () => {
-    expect(async () => {
-      await authenticateUser.execute({
+    await expect(
+      authenticateUser.execute({
         email: 'nonexistent@example.com',
         password: '1234',
       })
-    }).rejects.toBeInstanceOf(AppError)
+    ).rejects.toBeInstanceOf(AppError)
   })
 
   it('should not be able to authenticate with incorrect password', async () => {
@@ -55,11 +55,11 @@ describe('Authenticate User', () => {
       driver_license: '000123',
     })
 
-    expect(async () => {
-      await authenticateUser.execute({
+    await expect(
+      authenticateUser.execute({
         email,
         password: 'incorrect',
       })
-    }).rejects.toBeInstanceOf(AppError)
+    ).rejects.toBeInstanceOf(AppError)
   })
 })

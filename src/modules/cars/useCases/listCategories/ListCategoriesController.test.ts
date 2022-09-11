@@ -1,3 +1,4 @@
+import { Express } from 'express/lib/express'
 import request from 'supertest'
 import { DataSource } from 'typeorm'
 
@@ -5,25 +6,28 @@ import { app } from '@shared/infra/http/app'
 import { createConnection } from '@shared/infra/typeorm/data-source'
 
 let connection: DataSource
+let server: Express
 
 describe('List Category Controller', () => {
   beforeAll(async () => {
     connection = await createConnection()
     await connection.runMigrations()
+    server = app.listen()
   })
 
   afterAll(async () => {
     await connection.dropDatabase()
     await connection.destroy()
+    server.close()
   })
 
   it('should be able to list all categories', async () => {
-    const responseToken = await request(app).post('/sessions').send({
+    const responseToken = await request(server).post('/sessions').send({
       email: 'admin@rentx.com.br',
       password: 'admin',
     })
 
-    await request(app)
+    await request(server)
       .post('/categories')
       .send({
         name: 'Category Supertest',
@@ -33,7 +37,7 @@ describe('List Category Controller', () => {
         Authorization: `Bearer ${responseToken.body.token}`,
       })
 
-    const response = await request(app)
+    const response = await request(server)
       .get('/categories')
       .set({
         Authorization: `Bearer ${responseToken.body.token}`,

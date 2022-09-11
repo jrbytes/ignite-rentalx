@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker'
 import { SpecificationsRepositoryInMemory } from '@modules/cars/repositories/in-memory/SpecificationsRepositoryInMemory'
 import { AppError } from '@shared/errors/AppError'
 
@@ -28,16 +29,18 @@ describe('create specification', () => {
   })
 
   it('should not be able to create a new category with same name', async () => {
+    const name = faker.name.firstName()
+
     await createSpecification.execute({
-      name: 'Category test',
+      name,
       description: 'Category description test',
     })
 
-    expect(async () => {
-      await createSpecification.execute({
-        name: 'Category test',
+    await expect(
+      createSpecification.execute({
+        name,
         description: 'Category description test',
       })
-    }).rejects.toBeInstanceOf(AppError)
+    ).rejects.toBeInstanceOf(AppError)
   })
 })

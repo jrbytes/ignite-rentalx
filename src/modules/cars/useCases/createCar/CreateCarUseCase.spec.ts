@@ -37,8 +37,8 @@ describe('Create car', () => {
       category_id: 'category',
     })
 
-    expect(async () => {
-      await createCar.execute({
+    await expect(
+      createCar.execute({
         name: 'Name car 2',
         description: 'Description car',
         daily_rate: 100,
@@ -47,7 +47,7 @@ describe('Create car', () => {
         brand: 'Brand',
         category_id: 'category',
       })
-    }).rejects.toBeInstanceOf(AppError)
+    ).rejects.toBeInstanceOf(AppError)
   })
 
   it('should be able to create a new car with available true by default', async () => {

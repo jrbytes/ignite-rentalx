@@ -20,12 +20,12 @@ describe('Create Car Specification', () => {
   })
 
   it('should be able to add a new specification to a now-existent car', async () => {
-    expect(async () => {
-      await createCarSpecification.execute({
+    await expect(
+      createCarSpecification.execute({
         car_id: '1234',
         specifications_id: ['54321'],
       })
-    }).rejects.toBeInstanceOf(AppError)
+    ).rejects.toBeInstanceOf(AppError)
   })
 
   it('should be able to add a new specification to the car', async () => {

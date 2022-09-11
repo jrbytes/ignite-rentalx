@@ -40,13 +40,31 @@ describe('Create User', () => {
       driver_license: '000123',
     })
 
-    expect(async () => {
-      await createUser.execute({
+    await expect(
+      createUser.execute({
         name: 'John Doe',
         email,
         password,
         driver_license: '000123',
       })
-    }).rejects.toBeInstanceOf(AppError)
+    ).rejects.toBeInstanceOf(AppError)
+  })
+
+  it('should be able to create an user and select by id', async () => {
+    const email = faker.name.fullName()
+    const password = faker.random.alphaNumeric(8)
+
+    await createUser.execute({
+      name: 'John Doe',
+      email,
+      password,
+      driver_license: '000123',
+    })
+
+    const searchByEmail = await usersRepositoryInMemory.findByEmail(email)
+
+    const searchById = await usersRepositoryInMemory.findById(searchByEmail.id)
+
+    expect(searchById).toHaveProperty('id')
   })
 })
