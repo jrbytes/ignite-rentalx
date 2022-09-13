@@ -29,6 +29,24 @@ describe('Create User', () => {
     expect(userRepository).toHaveProperty('id')
   })
 
+  it('should be able to create an user and select by id', async () => {
+    const email = faker.name.fullName()
+    const password = faker.random.alphaNumeric(8)
+
+    await createUser.execute({
+      name: 'John Doe',
+      email,
+      password,
+      driver_license: '000123',
+    })
+
+    const searchByEmail = await usersRepositoryInMemory.findByEmail(email)
+
+    const searchById = await usersRepositoryInMemory.findById(searchByEmail.id)
+
+    expect(searchById).toHaveProperty('id')
+  })
+
   it('should not be able to create with the same email', async () => {
     const email = faker.name.fullName()
     const password = faker.random.alphaNumeric(8)
@@ -48,23 +66,5 @@ describe('Create User', () => {
         driver_license: '000123',
       })
     ).rejects.toBeInstanceOf(AppError)
-  })
-
-  it('should be able to create an user and select by id', async () => {
-    const email = faker.name.fullName()
-    const password = faker.random.alphaNumeric(8)
-
-    await createUser.execute({
-      name: 'John Doe',
-      email,
-      password,
-      driver_license: '000123',
-    })
-
-    const searchByEmail = await usersRepositoryInMemory.findByEmail(email)
-
-    const searchById = await usersRepositoryInMemory.findById(searchByEmail.id)
-
-    expect(searchById).toHaveProperty('id')
   })
 })
