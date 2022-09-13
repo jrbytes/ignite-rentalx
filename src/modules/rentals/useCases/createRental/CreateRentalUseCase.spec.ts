@@ -66,7 +66,7 @@ describe('Create Rental', () => {
         user_id: user,
         expected_return_date: dayAdd24Hours,
       })
-    ).rejects.toBeInstanceOf(AppError)
+    ).rejects.toEqual(new AppError('There is a rental in progress for user'))
   })
 
   it('should not be able to create a new rental if there is another open ot the same car', async () => {
@@ -82,7 +82,7 @@ describe('Create Rental', () => {
         user_id: '4321',
         expected_return_date: dayAdd24Hours,
       })
-    ).rejects.toBeInstanceOf(AppError)
+    ).rejects.toEqual(new AppError('Car is unavailable'))
   })
 
   it('should not be able to create a new rental with invalid return time', async () => {
@@ -92,6 +92,6 @@ describe('Create Rental', () => {
         user_id: '4321',
         expected_return_date: dayjs().toDate(),
       })
-    ).rejects.toBeInstanceOf(AppError)
+    ).rejects.toEqual(new AppError('Invalid return time!'))
   })
 })

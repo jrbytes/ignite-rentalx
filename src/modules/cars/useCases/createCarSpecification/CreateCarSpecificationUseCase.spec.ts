@@ -25,7 +25,7 @@ describe('Create Car Specification', () => {
         car_id: '1234',
         specifications_id: ['54321'],
       })
-    ).rejects.toBeInstanceOf(AppError)
+    ).rejects.toEqual(new AppError('Car does not exists'))
   })
 
   it('should be able to add a new specification to the car', async () => {

@@ -48,10 +48,10 @@ describe('Create User', () => {
   })
 
   it('should not be able to create with the same email', async () => {
-    const email = faker.name.fullName()
-    const password = faker.random.alphaNumeric(8)
+    const email = 'example@example.com'
+    const password = '123456'
 
-    await createUser.execute({
+    await usersRepositoryInMemory.create({
       name: 'John Doe',
       email,
       password,
@@ -65,6 +65,6 @@ describe('Create User', () => {
         password,
         driver_license: '000123',
       })
-    ).rejects.toBeInstanceOf(AppError)
+    ).rejects.toEqual(new AppError('User already exists'))
   })
 })

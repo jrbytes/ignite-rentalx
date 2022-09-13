@@ -41,6 +41,6 @@ describe('create specification', () => {
         name,
         description: 'Category description test',
       })
-    ).rejects.toBeInstanceOf(AppError)
+    ).rejects.toEqual(new AppError('Specification already exists'))
   })
 })
