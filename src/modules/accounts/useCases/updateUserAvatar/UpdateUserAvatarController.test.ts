@@ -27,13 +27,13 @@ describe('Update User Avatar Controller', () => {
       password: 'admin',
     })
 
-    const { token } = responseToken.body
+    const { refresh_token } = responseToken.body
 
     const responseUpdateUserAvatar = await request(server)
       .patch('/users/avatar')
       .attach('avatar', './tmp/filetest/avatar.jpeg')
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       })
 
     expect(responseUpdateUserAvatar.status).toBe(204)

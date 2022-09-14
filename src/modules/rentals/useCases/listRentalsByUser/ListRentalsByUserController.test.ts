@@ -24,7 +24,7 @@ describe('List Rentals By User Controller', () => {
       password: 'admin',
     })
 
-    const { token } = responseToken.body
+    const { refresh_token } = responseToken.body
 
     const responseCategory = await request(app)
       .post('/categories')
@@ -33,7 +33,7 @@ describe('List Rentals By User Controller', () => {
         description: 'Category Supertest',
       })
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       })
 
     const responseCar = await request(app)
@@ -48,7 +48,7 @@ describe('List Rentals By User Controller', () => {
         category_id: responseCategory.body.id,
       })
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       })
 
     await request(app)
@@ -58,14 +58,14 @@ describe('List Rentals By User Controller', () => {
         expected_return_date: dayjs().add(2, 'day').toDate(),
       })
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       })
 
     const rentalsByUser = await request(app)
       .get('/rentals/user')
       .send()
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       })
 
     expect(rentalsByUser.status).toBe(200)

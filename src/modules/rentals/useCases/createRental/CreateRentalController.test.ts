@@ -24,7 +24,7 @@ describe('Create Rental Controller', () => {
       password: 'admin',
     })
 
-    const { token } = responseToken.body
+    const { refresh_token } = responseToken.body
 
     const responseCategory = await request(app)
       .post('/categories')
@@ -33,7 +33,7 @@ describe('Create Rental Controller', () => {
         description: 'Category Supertest',
       })
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       })
 
     const responseCar = await request(app)
@@ -48,7 +48,7 @@ describe('Create Rental Controller', () => {
         category_id: responseCategory.body.id,
       })
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       })
 
     const date = dayjs.utc().add(2, 'day').toDate()
@@ -60,7 +60,7 @@ describe('Create Rental Controller', () => {
         car_id: responseCar.body.id,
       })
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       })
 
     expect(rental.status).toBe(201)

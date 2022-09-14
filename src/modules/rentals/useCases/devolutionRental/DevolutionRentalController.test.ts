@@ -24,7 +24,7 @@ describe('Devolution Rental Controller', () => {
       password: 'admin',
     })
 
-    const { token } = responseToken.body
+    const { refresh_token } = responseToken.body
 
     const responseCategory = await request(app)
       .post('/categories')
@@ -33,7 +33,7 @@ describe('Devolution Rental Controller', () => {
         description: 'Category Supertest',
       })
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       })
 
     const responseCar = await request(app)
@@ -48,7 +48,7 @@ describe('Devolution Rental Controller', () => {
         category_id: responseCategory.body.id,
       })
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       })
 
     const responseRental = await request(app)
@@ -58,7 +58,7 @@ describe('Devolution Rental Controller', () => {
         expected_return_date: dayjs().add(2, 'day').toDate(),
       })
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       })
 
     const responseDevolution = await request(app)
@@ -67,7 +67,7 @@ describe('Devolution Rental Controller', () => {
         id: responseRental.body.id,
       })
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       })
 
     expect(responseDevolution.status).toBe(200)

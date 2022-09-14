@@ -9,7 +9,7 @@
     "typeorm:create": "npx typeorm migration:create",
     "test:u": "jest --testMatch=\"**/*.spec.ts\" --maxWorkers=3",
     "test:i": "NODE_ENV=test jest --runInBand --testMatch=\"**/*.test.ts\"",
-    "test": "NODE_ENV=test jest --runInBand --testMatch=\"**/*.(test|jest).ts\""
+    "test": "NODE_ENV=test jest --runInBand --testMatch=\"**/*.(test|spec).ts\""
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

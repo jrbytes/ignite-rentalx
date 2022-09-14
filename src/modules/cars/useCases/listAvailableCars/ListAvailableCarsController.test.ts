@@ -27,7 +27,7 @@ describe('List Available Cars Controller', () => {
       password: 'admin',
     })
 
-    const { token } = responseToken.body
+    const { refresh_token } = responseToken.body
 
     const responseCategory = await request(server)
       .post('/categories')
@@ -36,7 +36,7 @@ describe('List Available Cars Controller', () => {
         description: 'Category Supertest',
       })
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       })
 
     await request(server)
@@ -51,7 +51,7 @@ describe('List Available Cars Controller', () => {
         category_id: responseCategory.body.id,
       })
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       })
 
     const responseListAvailableCars = await request(server)
