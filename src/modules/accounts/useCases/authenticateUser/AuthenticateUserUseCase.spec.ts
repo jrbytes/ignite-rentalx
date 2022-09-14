@@ -1,5 +1,7 @@
 import { faker } from '@faker-js/faker'
 import { UsersRepositoryInMemory } from '@modules/accounts/repositories/in-memory/UsersRepositoryInMemory'
+import { UsersTokensRepositoryInMemory } from '@modules/accounts/repositories/in-memory/UsersTokensRepositoryInMemory'
+import { DayjsDateProvider } from '@shared/container/providers/DateProvider/implementations/DayjsDateProvider'
 import { AppError } from '@shared/errors/AppError'
 
 import { CreateUserUseCase } from '../createUser/CreateUserUseCase'
@@ -7,13 +9,22 @@ import { AuthenticateUserUseCase } from './AuthenticateUserUseCase'
 
 let authenticateUser: AuthenticateUserUseCase
 let usersRepositoryInMemory: UsersRepositoryInMemory
+let usersTokensRepositoryInMemory: UsersTokensRepositoryInMemory
+let dateProvider: DayjsDateProvider
 let createUser: CreateUserUseCase
 
 describe('Authenticate User', () => {
   beforeEach(() => {
     usersRepositoryInMemory = new UsersRepositoryInMemory()
+    usersTokensRepositoryInMemory = new UsersTokensRepositoryInMemory()
+    dateProvider = new DayjsDateProvider()
     createUser = new CreateUserUseCase(usersRepositoryInMemory)
-    authenticateUser = new AuthenticateUserUseCase(usersRepositoryInMemory)
+
+    authenticateUser = new AuthenticateUserUseCase(
+      usersRepositoryInMemory,
+      usersTokensRepositoryInMemory,
+      dateProvider
+    )
   })
 
   it('should be able to authenticate an user', async () => {

@@ -8,7 +8,8 @@
     "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js -d src/shared/infra/typeorm/data-source.ts",
     "typeorm:create": "npx typeorm migration:create",
     "test:u": "jest --testMatch=\"**/*.spec.ts\" --maxWorkers=3",
-    "test:i": "NODE_ENV=test jest --runInBand --testMatch=\"**/*.test.ts\""
+    "test:i": "NODE_ENV=test jest --runInBand --testMatch=\"**/*.test.ts\"",
+    "test": "NODE_ENV=test jest --runInBand --testMatch=\"**/*.(test|jest).ts\""
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
