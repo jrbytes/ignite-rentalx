@@ -1,3 +1,4 @@
+import dotenv from 'dotenv'
 import express, { Request, Response, NextFunction } from 'express'
 import 'express-async-errors'
 import 'reflect-metadata'
@@ -11,6 +12,7 @@ import swaggerFile from '../../../swagger.json'
 import { router } from './routes'
 
 const app = express()
+dotenv.config()
 
 app.use(express.json())
 

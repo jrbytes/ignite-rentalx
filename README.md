@@ -75,3 +75,19 @@ Deve ser possível listar todos os alugueis para um usuário.
 
 **RN**
 O usuário deve estar logado na aplicação.
+
+# Recuperação de senha
+
+**RF**
+Deve ser possível o usuário recuperar sua senha informando seu e-mail.
+O usuário deve receber um e-mail com instruções de recuperação de senha.
+O usuário deve poder resetar sua senha.
+
+**RNF**
+Utilizar Mailtrap para testar envios em ambiente de desenvolvimento.
+Utilizar Amazon SES para envios em produção.
+O envio de e-mails deve acontecer em segundo plano (background job).
+
+**RN**
+O link enviado por e-mail para resetar senha, deve expirar em 2h.
+O usuário precisa confirmar a nova senha ao resetar sua senha.
