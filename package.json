@@ -11,6 +11,7 @@
     "clear:jest": "jest --clearCache",
     "test:u": "jest --testMatch=\"**/*.spec.ts\" --maxWorkers=3",
     "test:i": "NODE_ENV=test jest --runInBand --testMatch=\"**/*.test.ts\"",
+    "test:d": "NODE_ENV=test jest --runInBand --detectOpenHandles --testMatch=\"**/*.(test|spec).ts\"",
     "test": "NODE_ENV=test jest --runInBand --testMatch=\"**/*.(test|spec).ts\""
   },
   "dependencies": {

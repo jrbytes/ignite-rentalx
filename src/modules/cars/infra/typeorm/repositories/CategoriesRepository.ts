@@ -15,11 +15,8 @@ export class CategoriesRepository implements ICategoriesRepository {
     this.repository = dataSource.getRepository(Category)
   }
 
-  async create({ name, description }: ICreateCategoryDTO): Promise<void> {
-    const category = this.repository.create({
-      description,
-      name,
-    })
+  async create(data: ICreateCategoryDTO): Promise<void> {
+    const category = this.repository.create(data)
 
     await this.repository.save(category)
   }
