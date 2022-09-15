@@ -31,6 +31,8 @@ export default {
     '/src/config/',
     '/src/shared/infra/http/',
     '/src/utils/',
+    '/src/modules/accounts/useCases/resetPasswordUser/ResetPasswordUserController.ts',
+    '/src/modules/accounts/useCases/sendForgotPasswordMail/SendForgotPasswordMailController.ts',
   ],
 
   // Indicates which provider should be used to instrument code for coverage
