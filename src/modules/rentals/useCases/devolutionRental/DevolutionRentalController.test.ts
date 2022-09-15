@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import { Express } from 'express/lib/express'
 import request from 'supertest'
 import { DataSource } from 'typeorm'
 
@@ -6,27 +7,30 @@ import { app } from '@shared/infra/http/app'
 import { createConnection } from '@shared/infra/typeorm/data-source'
 
 let connection: DataSource
+let server: Express
 
 describe('Devolution Rental Controller', () => {
   beforeAll(async () => {
     connection = await createConnection()
     await connection.runMigrations()
+    server = app.listen()
   })
 
   afterAll(async () => {
     await connection.dropDatabase()
     await connection.destroy()
+    server.close()
   })
 
   it('should be able to devolution rental', async () => {
-    const responseToken = await request(app).post('/sessions').send({
+    const responseToken = await request(server).post('/sessions').send({
       email: 'admin@rentx.com.br',
       password: 'admin',
     })
 
     const { refresh_token } = responseToken.body
 
-    const responseCategory = await request(app)
+    const responseCategory = await request(server)
       .post('/categories')
       .send({
         name: 'Category Supertest',
@@ -36,7 +40,7 @@ describe('Devolution Rental Controller', () => {
         Authorization: `Bearer ${refresh_token}`,
       })
 
-    const responseCar = await request(app)
+    const responseCar = await request(server)
       .post('/cars')
       .send({
         name: 'Car Supertest',
@@ -51,7 +55,7 @@ describe('Devolution Rental Controller', () => {
         Authorization: `Bearer ${refresh_token}`,
       })
 
-    const responseRental = await request(app)
+    const responseRental = await request(server)
       .post('/rentals')
       .send({
         car_id: responseCar.body.id,
@@ -61,7 +65,7 @@ describe('Devolution Rental Controller', () => {
         Authorization: `Bearer ${refresh_token}`,
       })
 
-    const responseDevolution = await request(app)
+    const responseDevolution = await request(server)
       .post(`/rentals/devolution/${responseRental.body.id}`)
       .send({
         id: responseRental.body.id,
