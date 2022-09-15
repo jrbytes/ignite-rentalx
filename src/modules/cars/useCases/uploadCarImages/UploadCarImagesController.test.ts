@@ -26,7 +26,7 @@ describe('Upload Car Images Controller', () => {
       email: 'admin@rentx.com.br',
       password: 'admin',
     })
-    const { refresh_token } = responseToken.body
+    const { token } = responseToken.body
 
     const responseCategory = await request(server)
       .post('/categories')
@@ -35,7 +35,7 @@ describe('Upload Car Images Controller', () => {
         description: 'Category Supertest',
       })
       .set({
-        Authorization: `Bearer ${refresh_token}`,
+        Authorization: `Bearer ${token}`,
       })
 
     const responseCar = await request(server)
@@ -50,14 +50,14 @@ describe('Upload Car Images Controller', () => {
         category_id: responseCategory.body.id,
       })
       .set({
-        Authorization: `Bearer ${refresh_token}`,
+        Authorization: `Bearer ${token}`,
       })
 
     const responseCarImages = await request(server)
       .post(`/cars/images/${responseCar.body.id}`)
       .attach('images', './tmp/filetest/audi-a3.jpeg')
       .set({
-        Authorization: `Bearer ${refresh_token}`,
+        Authorization: `Bearer ${token}`,
       })
 
     expect(responseCarImages.status).toBe(201)

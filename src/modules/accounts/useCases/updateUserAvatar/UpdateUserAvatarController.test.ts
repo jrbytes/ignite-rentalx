@@ -31,13 +31,13 @@ describe('Update User Avatar Controller', () => {
       password,
     })
 
-    const { refresh_token } = responseToken.body
+    const { token } = responseToken.body
 
     const responseUpdateUserAvatar = await request(server)
       .patch('/users/avatar')
       .attach('avatar', './tmp/filetest/avatar.jpeg')
       .set({
-        Authorization: `Bearer ${refresh_token}`,
+        Authorization: `Bearer ${token}`,
       })
 
     const responseTokenToDeleteAvatar = await request(server)

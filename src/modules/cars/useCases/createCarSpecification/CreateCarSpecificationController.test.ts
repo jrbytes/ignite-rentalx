@@ -27,7 +27,7 @@ describe('Create Car Specification Controller', () => {
       password: 'admin',
     })
 
-    const { refresh_token } = responseToken.body
+    const { token } = responseToken.body
 
     const responseCategory = await request(server)
       .post('/categories')
@@ -36,7 +36,7 @@ describe('Create Car Specification Controller', () => {
         description: 'Category Supertest',
       })
       .set({
-        Authorization: `Bearer ${refresh_token}`,
+        Authorization: `Bearer ${token}`,
       })
 
     const responseCar = await request(server)
@@ -51,7 +51,7 @@ describe('Create Car Specification Controller', () => {
         category_id: responseCategory,
       })
       .set({
-        Authorization: `Bearer ${refresh_token}`,
+        Authorization: `Bearer ${token}`,
       })
 
     const responseSpecification = await request(server)
@@ -61,7 +61,7 @@ describe('Create Car Specification Controller', () => {
         description: 'Specification Supertest',
       })
       .set({
-        Authorization: `Bearer ${refresh_token}`,
+        Authorization: `Bearer ${token}`,
       })
 
     const responseCarSpecification = await request(server)
@@ -70,7 +70,7 @@ describe('Create Car Specification Controller', () => {
         specifications_id: [responseSpecification.body.id],
       })
       .set({
-        Authorization: `Bearer ${refresh_token}`,
+        Authorization: `Bearer ${token}`,
       })
 
     expect(responseCarSpecification.status).toBe(200)

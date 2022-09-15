@@ -26,12 +26,12 @@ describe('Import Category Controller', () => {
       email: 'admin@rentx.com.br',
       password: 'admin',
     })
-    const { refresh_token } = responseToken.body
+    const { token } = responseToken.body
 
     const responseSpecification = await request(server)
       .post('/categories/import')
       .set({
-        Authorization: `Bearer ${refresh_token}`,
+        Authorization: `Bearer ${token}`,
       })
       .attach('file', './tmp/filetest/categories-test.csv')
 

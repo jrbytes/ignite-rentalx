@@ -26,7 +26,7 @@ describe('Create Specification Controller', () => {
       email: 'admin@rentx.com.br',
       password: 'admin',
     })
-    const { refresh_token } = responseToken.body
+    const { token } = responseToken.body
 
     const responseSpecification = await request(server)
       .post('/specifications')
@@ -35,7 +35,7 @@ describe('Create Specification Controller', () => {
         description: 'Specification Supertest',
       })
       .set({
-        Authorization: `Bearer ${refresh_token}`,
+        Authorization: `Bearer ${token}`,
       })
 
     expect(responseSpecification.status).toBe(201)
